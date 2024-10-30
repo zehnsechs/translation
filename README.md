@@ -98,7 +98,7 @@ Local Dev Setup
 
 At this point, the app will be running at `http://localhost:9000/`. You may optionally perform the following tasks:
 
-* To create initial administrator users and groups, run `docker-compose exec app bash`, and then in the shell, run `python3 manage.py loaddata initial_data.json`. Then, exit from the shell by typing `exit`.
+* To create initial administrator users and groups, run `docker-compose exec app bash`, and then in the shell, run `. ../venv/bin/activate` and `python3 manage.py loaddata initial_data.json`. Then, exit from the shell by typing `exit`.
 * To add countries, languages, and users, use the CSV importer in the admin interface. Sample data is provided in `data/`.
 * You can get access to the system logs by running `docker-compose logs`. To follow the logs from now on, run `docker-compose logs -f --tail=0`.
 * To stop the app, run `docker-compose stop`.
