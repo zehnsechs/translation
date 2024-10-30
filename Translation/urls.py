@@ -1,5 +1,6 @@
 from django.urls import include, path, re_path
 from django.contrib import admin
+from django.conf import settings
 
 from trans.views.user import FirstPage
 
@@ -7,6 +8,8 @@ urlpatterns = [
     path('admin/login/', FirstPage.as_view()),
     path('admin/', admin.site.urls),
     path('queue/', include('print_job_queue.urls')),
-    path('' , include('trans.urls')),
-    path('' , include('autotranslate.urls')),
+    path('', include('trans.urls')),
 ]
+
+if settings.ENABLE_AUTO_TRANSLATE:
+    urlpatterns.append(path('', include('autotranslate.urls')))

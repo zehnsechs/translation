@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'import_export',
     'trans',
     'print_job_queue',
-    'autotranslate',
 ]
 
 WEBSOCKET_URL = '/ws3/'
@@ -73,8 +72,7 @@ ROOT_URLCONF = 'Translation.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -168,8 +166,9 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': os.environ.get('LOG_HANDLERS', 'stderr').split(','), 	#show errors
-#            'handlers': ['file', 'sentry'],	#not show errors
+            # show errors
+            'handlers': os.environ.get('LOG_HANDLERS', 'stderr').split(','),
+            #            'handlers': ['file', 'sentry'],	#not show errors
             'level': 'DEBUG',
             'propagate': True,
         },
@@ -221,7 +220,10 @@ XFF_TRUSTED_PROXY_DEPTH = 1
 XFF_STRICT = not DEBUG
 CSRF_TRUSTED_ORIGINS = [HOST_URL + '*']
 
-ENABLE_AUTO_TRANSLATE = 'autotranslate' in INSTALLED_APPS
+ENABLE_AUTO_TRANSLATE = False
 GCLOUD_PROJECT_ID = None
 GCLOUD_SERVICE_ACCOUNT_JSON_PATH = None
 INITIAL_DEFAULT_PER_USER_TRANSLATION_QUOTA = 0
+
+if ENABLE_AUTO_TRANSLATE:
+    INSTALLED_APPS.append('autotranslate')
